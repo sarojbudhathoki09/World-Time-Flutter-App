@@ -23,12 +23,14 @@ class _HomeState extends State<Home> {
     if (args != null && args is Map) {
       data = args;
     }
-    print(data);
 
-    String bgImage = data['isDaytime'] ? 'dColor?g' : 'night.png';
+    bool isDaytime = data['isDaytime'] ?? true;
+
+    String bgImage = data['isDaytime'] ? 'day.png' : 'night.png';
     Color? bgColor = data['isDaytime'] ? Colors.blue : Colors.indigo[700];
 
     return Scaffold(
+      backgroundColor: bgColor,
       body: SafeArea(
           child: Container(
             decoration: BoxDecoration(
@@ -45,8 +47,16 @@ class _HomeState extends State<Home> {
                     onPressed: (){
                       Navigator.pushNamed(context, '/location');
                     },
-                    icon: Icon(Icons.edit_location),
-                    label: Text('Edit Location'),
+                    icon: Icon(
+                        Icons.edit_location,
+                      color: Colors.grey[300],
+                    ),
+                    label: Text(
+                        'Edit Location',
+                        style: TextStyle(
+                        color: Colors.grey[300]
+                      ),
+                    ),
                       ),
                   SizedBox(height: 20.0),
                   Row(
@@ -56,7 +66,8 @@ class _HomeState extends State<Home> {
                         data['location'] ?? '',
                         style: TextStyle(
                           fontSize: 28.0,
-                          letterSpacing: 2.0
+                          letterSpacing: 2.0,
+                          color: Colors.white,
                         ),
                       )
                     ],
@@ -65,7 +76,8 @@ class _HomeState extends State<Home> {
                   Text(
                     data['time'] ?? '',
                     style: TextStyle(
-                      fontSize:  66.0
+                      fontSize:  66.0,
+                      color: Colors.white,
                     ),
                   )
                 ],
